@@ -1,6 +1,7 @@
 ---
 region: us-east-1
 stack_name: openshift-infra
+add_node: no
 ami: ami-a33668b4
 no_confirm: True
 master_instance_type: m4.large
