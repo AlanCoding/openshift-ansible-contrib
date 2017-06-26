@@ -55,6 +55,11 @@ username=admin
 password=yourpassword
 ```
 
+You will need to git clone the openshift-ansible installer to your tower instance. In the future it would be ideal to have this integrated into tower as a project instead of stand alone.
+```
+git clone https://github.com/openshift/openshift-ansible.git /usr/share/ansible/openshift-ansible
+```
+
 ```
 $ git clone https://github.com/strategicdesignteam/openshift-ansible-contrib.git
 $ cd reference-architecture/ansible-tower-integration/tower_config
