@@ -60,6 +60,7 @@ You will need to git clone the openshift-ansible installer to your tower instanc
 git clone https://github.com/openshift/openshift-ansible.git /usr/share/ansible/openshift-ansible
 ```
 
+Now you can clone the openshift-ansible-contrib repository and run the tower_config bootstrapping playbook. The table below explains the variables you should pass to it.
 ```
 $ git clone https://github.com/strategicdesignteam/openshift-ansible-contrib.git
 $ cd reference-architecture/ansible-tower-integration/tower_config
