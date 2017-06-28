@@ -39,3 +39,5 @@ wildcard_zone: CHANGEME
 ocp_username: admin
 ocp_password: CHANGEME
 infrastructure_id: 007
+openshift_hosted_metrics_deploy: true
+openshift_hosted_metrics_storage_volume_size: 20Gi

@@ -73,7 +73,7 @@
 - name: Add tower inventory
   tower_inventory:
     name: "aws-inventory"
-    description: "Only the best inventory ... ever!"
+    description: "Tower inventory for AWS"
     organization: "Default"
     state: present
     tower_config_file: "~/.tower_cli.cfg"
@@ -81,7 +81,7 @@
 - name: Add tower group
   tower_group:
     name: aws 
-    description: "to the cloud"
+    description: "Tower Group for AWS"
     source: ec2
     credential: ec2
     inventory: "aws-inventory" 
