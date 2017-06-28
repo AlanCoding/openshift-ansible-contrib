@@ -35,7 +35,7 @@
     deployment_type: openshift-enterprise
     os_sdn_network_plugin_name: "{{ openshift_sdn }}"
     openshift_master_identity_providers: [{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
-    openshift_master_htpasswd_users:{'openshift': '$apr1$Mr5ZCJzb$mvaXu2UMOZ47pnQqNrLEi.'}
+    openshift_master_htpasswd_users: {'openshift': '$apr1$Mr5ZCJzb$mvaXu2UMOZ47pnQqNrLEi.'}
     osm_use_cockpit: true
     containerized: false
     openshift_hosted_registry_storage_kind: object
