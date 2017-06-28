@@ -46,6 +46,14 @@ Once you have deployed Ansible Tower on a provider, you can then configure it to
 
 This guide shows you how to use the master branch of [OpenShift-Ansible-Contrib](https://github.com/openshift/openshift-ansible-contrib). If you want to ensure that no changes are made to the deployment configuration, you may want to [fork the repository](https://help.github.com/articles/fork-a-repo/) to ensure nothing changes without your knowledge.
 
+The directories in this 
+
+```
+------ create_httpd_file => playbooks to create a httpd auth file
+  \---      tower_config => playbooks that bootstrap a blank tower
+   \--    tower_unconfig => playbooks that unconfigure tower
+```
+
 Once you have Ansible Tower running and licensed you can clone and run the tower_config playbook with the appropriate variables. This will configure Ansible. Just make sure you have your tower_cli.cfg file setup and also make sure you have your AWS_KEY and AWS_SECRET as well as the ssh key you wish to use to authenticate to your machines. Then you can do the following:
 
 Set the appropriate host, username, and password in ~/.tower_cli.cfg.
@@ -106,6 +114,5 @@ We would welcome the addition of the following sections:
 + Configuring Ansible Tower for deployments on Microsoft Azure
 + Configuring Ansible Tower for deployments on OpenStack
 + Configuring Ansible Tower for deployments on VMware
-
 
 
