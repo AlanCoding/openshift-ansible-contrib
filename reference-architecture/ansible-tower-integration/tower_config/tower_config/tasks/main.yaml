@@ -109,6 +109,7 @@
   tower_credential:
     name: aws-privkey
     kind: ssh
+    become_method: sudo
     description: aws-privkey
     organization: "Default"
     state: present
