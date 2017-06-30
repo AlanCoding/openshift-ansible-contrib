@@ -213,7 +213,7 @@
     name: aws-openshift-cfme-install
     job_type: run
     inventory: aws-inventory
-    become_enabled: yes
+    become_enabled: no
     project: cfme-ansible
     playbook: "cfme_ose_install.yaml"
     machine_credential: aws-privkey
@@ -226,7 +226,7 @@
     name: aws-openshfit-cfme-ocp-provider
     job_type: run
     inventory: aws-inventory
-    become_enabled: yes
+    become_enabled: no
     project: cfme-ansible
     playbook: "cfme_ose_aws_provision.yaml"
     machine_credential: aws-privkey
