@@ -11,6 +11,48 @@
     name: ansible-tower-cli
   become: true
 
+- name: Install python2-boto
+  yum:
+    name: python2-boto
+    state: present
+  become: true
+
+- name: Install pyOpenSSL
+  yum:
+    name: pyOpenSSL
+    state: present
+  become: true
+
+- name: Install python-netaddr
+  yum:
+    name: python-netaddr
+    state: present
+  become: true
+
+- name: Install python-six
+  yum:
+    name: python-six
+    state: present
+  become: true
+
+- name: Install python2-boto3
+  yum:
+    name: python2-boto3
+    state: present
+  become: true
+
+- name: Install python-click
+  yum:
+    name: python-click
+    state: present
+  become: true
+
+- name: Install python-httplib2
+  yum:
+    name: python-httplib2
+    state: present
+  become: true
+
 - name: Create tower organization
   tower_organization:
     name: "Default"
@@ -25,7 +67,7 @@
     organization: "Default"
     scm_url: https://github.com/strategicdesignteam/openshift-ansible-contrib.git
     scm_type: git
-    scm_branch: master
+    scm_branch: temp
     scm_update_on_launch: true
     state: present
     tower_config_file: "~/.tower_cli.cfg"
@@ -42,16 +84,32 @@
     state: present
     tower_config_file: "~/.tower_cli.cfg"
 
+- name: Add tower project for cfme-ansible
+  tower_project:
+    name: "cfme-ansible"
+    description: "sync cfme-ansible"
+    organization: "Default"
+    scm_url: https://github.com/strategicdesignteam/cfme-ansible.git
+    scm_type: git
+    scm_branch: master
+    scm_update_on_launch: true
+    state: present
+    tower_config_file: "~/.tower_cli.cfg"
+
 - name: Sync project openshift-ansible-contrib
   command: tower-cli project update -n openshift-ansible-contrib
 
 - name: Sync project ansible-redhat-access-insights-client
   command: tower-cli project update -n ansible-redhat-access-insights-client
 
+- name: Sync project cfme-ansible
+  command: tower-cli project update -n cfme-ansible
+
 - name: Add tower credential for machine
   tower_credential:
     name: aws-privkey
     kind: ssh
+    become_method: sudo
     description: aws-privkey
     organization: "Default"
     state: present
@@ -73,7 +131,7 @@
 - name: Add tower inventory
   tower_inventory:
     name: "aws-inventory"
-    description: "Only the best inventory ... ever!"
+    description: "Tower inventory for AWS"
     organization: "Default"
     state: present
     tower_config_file: "~/.tower_cli.cfg"
@@ -81,7 +139,7 @@
 - name: Add tower group
   tower_group:
     name: aws 
-    description: "to the cloud"
+    description: "Tower Group for AWS"
     source: ec2
     credential: ec2
     inventory: "aws-inventory" 
@@ -145,6 +203,32 @@
     become_enabled: yes
     project: openshift-ansible-contrib
     playbook: "reference-architecture/aws-ansible/playbooks/openshift-install.yaml"
+    machine_credential: aws-privkey
+    cloud_credential: ec2
+    state: present
+    tower_config_file: "~/.tower_cli.cfg"
+
+- name: Create aws-openshift-cfme-install job template
+  tower_job_template:
+    name: aws-openshift-cfme-install
+    job_type: run
+    inventory: aws-inventory
+    become_enabled: yes
+    project: cfme-ansible
+    playbook: "cfme_ose_install.yaml"
+    machine_credential: aws-privkey
+    cloud_credential: ec2
+    state: present
+    tower_config_file: "~/.tower_cli.cfg"
+
+- name: Create aws-openshift-cfme-ocp-provider job template
+  tower_job_template:
+    name: aws-openshfit-cfme-ocp-provider
+    job_type: run
+    inventory: aws-inventory
+    become_enabled: yes
+    project: cfme-ansible
+    playbook: "cfme_ose_aws_provision.yaml"
     machine_credential: aws-privkey
     cloud_credential: ec2
     state: present

@@ -46,6 +46,14 @@ Once you have deployed Ansible Tower on a provider, you can then configure it to
 
 This guide shows you how to use the master branch of [OpenShift-Ansible-Contrib](https://github.com/openshift/openshift-ansible-contrib). If you want to ensure that no changes are made to the deployment configuration, you may want to [fork the repository](https://help.github.com/articles/fork-a-repo/) to ensure nothing changes without your knowledge.
 
+The directories contained within this directory roughly include:
+
+```
+------ create_httpd_file => playbooks to create a httpd auth file
+  \---      tower_config => playbooks that bootstrap a blank tower
+   \--    tower_unconfig => playbooks that unconfigure tower
+```
+
 Once you have Ansible Tower running and licensed you can clone and run the tower_config playbook with the appropriate variables. This will configure Ansible. Just make sure you have your tower_cli.cfg file setup and also make sure you have your AWS_KEY and AWS_SECRET as well as the ssh key you wish to use to authenticate to your machines. Then you can do the following:
 
 Set the appropriate host, username, and password in ~/.tower_cli.cfg.
@@ -76,7 +84,7 @@ $ ansible-playbook tower_config.yaml --extra-vars "AWS_MACHINE_SSH_KEY=<PATH/TO/
 | TOWER_USER                 | yes                | Username (admin)                              |
 | TOWER_PASSWORD             | yes                | Password for TOWER_USER                       |
 
-This will configure tower with all the inventories, credentials, job_templates, and workflows to begin deploying across Amazon Web Services. After this is done you will need to log into Ansible Tower and edit the job named "workflow-ocp-aws-install". You will need to edit the extra_vars section and 
+This will configure tower with all the inventories, credentials, job_templates, and workflows to begin deploying across Amazon Web Services. After this is done you will need to log into Ansible Tower and edit the job named "workflow-ocp-aws-install". You will need to edit the extra_vars section of the job named workflow-ocp-aws-install and change the values wherever they are set to "CHANGEME" to the appropriate values for your environment. You can find the documentation for those values in the specific provider reference architectures. For example, here in the [AWS Reference Architecture](https://github.com/strategicdesignteam/openshift-ansible-contrib/tree/temp/reference-architecture/aws-ansible)
 
 The workflow-ocp-aws-install can now be run. It will:
 
@@ -106,6 +114,5 @@ We would welcome the addition of the following sections:
 + Configuring Ansible Tower for deployments on Microsoft Azure
 + Configuring Ansible Tower for deployments on OpenStack
 + Configuring Ansible Tower for deployments on VMware
-
 
 
