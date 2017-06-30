@@ -98,6 +98,27 @@ There are many modules for tower (search tower_ [here](http://docs.ansible.com/a
 
 It also appears that workflows can be exported via a schema. There is a great document [here](https://github.com/ansible/tower-cli/blob/master/docs/WORKFLOWS.md) on how to do workflows via tower-cli. The problem is that schemas requires IDs on inventories. These IDs are dynamically generated when a inventory is created, so it's impossible to export a schema with an inventory and pass it to another tower instance and have it imported correctly. Here is a [issue in github](https://github.com/ansible/tower-cli/issues/302) asking it to be changed.
 
+
+Configuring SSH over bastion host:
+
+As your Openshift VMs are running on AWS private IPs, you must configure ssh_config on tower to allow SSH connection through a bastion host.
+
+add the following configuration at the end of this file:  /etc/ssh/ssh_config
+
+```
+Host "10.20.*.*"
+     ProxyCommand               ssh ec2-user@bastion -W %h:%p
+
+Host bastion
+     Hostname                   bastion.strategicdesign.io
+     user                       ec2-user
+     StrictHostKeyChecking      no
+     ProxyCommand               none
+     CheckHostIP                no
+     ForwardAgent               yes
+```
+
+
 ### Future Sections for configuring deployments of OCP, Insights, CloudForms on Clouds
 
 We would welcome the addition of the following sections:
