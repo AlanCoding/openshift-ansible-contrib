@@ -24,7 +24,7 @@ bastion_sg: /dev/null
 public_hosted_zone: CHANGEME
 app_dns_prefix: apps
 deployment_type: openshift-enterprise
-openshift_sdn: openshift-ovs-subnet
+openshift_sdn: redhat/openshift-ovs-subnet
 console_port: "443"
 rhsm_user: CHANGEME
 rhsm_password: CHANGEME
