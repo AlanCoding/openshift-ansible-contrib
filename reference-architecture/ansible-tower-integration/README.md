@@ -118,6 +118,12 @@ Host bastion
      ForwardAgent               yes
 ```
 
+Other recommended changes in /etc/ansible/ansible.cfg
+
+```
+forks          = 50
+host_key_checking = False
+```
 
 ### Future Sections for configuring deployments of OCP, Insights, CloudForms on Clouds
 
