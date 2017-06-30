@@ -7,4 +7,5 @@
   become: true
 
 - name: create httpd password
-  command: htpasswd -b -c /etc/origin/master/htpasswd {{ ocp_username }} {{ ocp_password }}
+  command: htpasswd -b /etc/origin/master/htpasswd {{ ocp_username }} {{ ocp_password }}
+
