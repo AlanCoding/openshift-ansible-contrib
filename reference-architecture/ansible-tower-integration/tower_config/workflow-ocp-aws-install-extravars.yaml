@@ -40,6 +40,7 @@ ocp_username: admin
 ocp_password: CHANGEME
 infrastructure_id: 007
 openshift_hosted_metrics_storage_volume_size: 20Gi
+vpc_subnet_id: CHANGEME
 instance_name: cfme01
 region: us-east-1
 security_group: tower-sg-1
