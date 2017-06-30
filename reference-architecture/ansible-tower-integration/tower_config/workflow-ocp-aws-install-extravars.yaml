@@ -39,7 +39,6 @@ wildcard_zone: CHANGEME
 ocp_username: admin
 ocp_password: CHANGEME
 infrastructure_id: 007
-deploy_openshift_metrics: true
 openshift_hosted_metrics_storage_volume_size: 20Gi
 instance_name: cfme01
 region: us-east-1
@@ -50,3 +49,5 @@ aws_instance_type: t2.large
 public_ip: yes
 ocp_password: Prototype2017
 ocp_username: devuser01
+openshift_disable_check: disk_availability,docker_storage,memory_availability
+openshift_hosted_metrics_deploy: true
