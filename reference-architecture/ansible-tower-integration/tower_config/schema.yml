@@ -7,3 +7,7 @@ REPLACEME
       - job_template: create_httpd_file
         success_nodes:
         - job_template: redhat-access-insights-client
+          success_nodes:
+          - job_template: aws-openshift-cfme-install
+            success_nodes:
+            - job_template: aws-openshfit-cfme-ocp-provider
