@@ -11,6 +11,11 @@
     name: ansible-tower-cli
   become: true
 
+- name: Install ManageIQ module
+  pip:
+    name: manageiq-client
+  become: true
+
 - name: Install python2-boto
   yum:
     name: python2-boto
@@ -188,6 +193,7 @@
     name: redhat-access-insights-client
     job_type: run
     inventory: aws-inventory
+    become_enabled: yes
     project: ansible-redhat-access-insights-client
     playbook: "redhat-access-insights-client.yaml"
     machine_credential: aws-privkey
@@ -223,7 +229,7 @@
 
 - name: Create aws-openshift-cfme-ocp-provider job template
   tower_job_template:
-    name: aws-openshfit-cfme-ocp-provider
+    name: aws-openshift-cfme-ocp-provider
     job_type: run
     inventory: aws-inventory
     become_enabled: no
@@ -247,16 +253,10 @@
   lineinfile:
     path: schema.yml
     regexp: '^ONEMORETIME'
-    line: '           - inventory_source: aws (aws-inventory - {{ myoutput.stdout }})'
+    line: '                 - inventory_source: aws (aws-inventory - {{ myoutput.stdout }})'
 
 - name: Create a schema for workflow-ocp-aws-install
   command: tower-cli workflow schema workflow-ocp-aws-install @schema.yml
-
-- name: Reset schema file in case we run again
-  lineinfile:
-     path: schema.yml
-     regexp: '^(.*)inventory_source'
-     line: 'REPLACEME'
 
 - name: Reset schema file in case we run again, again
   lineinfile:
@@ -264,5 +264,8 @@
      regexp: '^(.*)inventory_source'
      line: 'ONEMORETIME'
 
-
-
+- name: Reset schema file in case we run again
+  lineinfile:
+     path: schema.yml
+     regexp: '^(.*)inventory_source'
+     line: 'REPLACEME'

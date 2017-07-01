@@ -51,4 +51,4 @@ public_ip: yes
 ocp_password: Prototype2017
 ocp_username: devuser01
 openshift_disable_check: disk_availability,docker_storage,memory_availability
-openshift_hosted_metrics_deploy: true
+openshift_hosted_metrics_deploy: false
