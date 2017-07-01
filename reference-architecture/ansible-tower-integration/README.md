@@ -4,6 +4,8 @@ DISCLAIMER: The code within openshift-ansible-contrib is unsupported code that c
 
 This guide explains how to integrate the reference architectures within openshift-ansible-contrib/reference-architectures into Ansible Tower. By integrating the reference architecture playbooks into Ansible Tower it is possible to centralize and control the OpenShift infrastructure with a visual dashboard, role-based access control, job scheduling, integrated notifications and graphical inventory management. You may also want to check out this [UI prototype](https://github.com/strategicdesignteam/labs-console) that shows how it's possible to build a custom interface north of Tower to visualize the automated deployments for a user that might not want to understand the intricies of Tower.
 
+Finally, you might want to check out this [demonstration video](https://youtu.be/0aNJX-GQowI)
+
 ## Overview
 
 The diagram below illustrates the desired end state of this guide - to have Ansible Tower workflows able to deploy OpenShift and other services on various cloud providers, including creating the necessary virtual infrastructure on each cloud provider. 
