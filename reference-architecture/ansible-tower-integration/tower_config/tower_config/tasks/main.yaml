@@ -96,10 +96,6 @@
     state: present
     tower_config_file: "~/.tower_cli.cfg"
 
-- name: Get Inventory Source ID
-  shell: curl -s -k -u {{ TOWER_USER }}:{{ TOWER_PASSWORD }} https://{{ TOWER_HOSTNAME }}/api/v1/inventory_sources/ | python -m json.tool | grep -m 1 id |awk -F":" '{print $2}' |awk -F"," '{print $1}' |sed 's/^[ \t]*//;s/[ \t]*$//'
-  register: myoutput
-
 - name: Create aws-infrastructure job template
   become: true
   tower_job_template:
@@ -153,19 +149,7 @@
 - name: Create workflow-ocp-aws-install
   command: tower-cli workflow create --name="workflow-ocp-aws-install" --organization="Default" --description="A workflow for deploying OCP on AWS" -e @workflow-ocp-aws-install-extravars.yaml
 
-- name: Replace inventory source
-  lineinfile:
-    path: schema.yml
-    regexp: '^REPLACEME'
-    line: '  - inventory_source: aws (aws-inventory - {{ myoutput.stdout }})'
-
 - name: Create a schema for workflow-ocp-aws-install
   command: tower-cli workflow schema workflow-ocp-aws-install @schema.yml
-
-- name: Reset schema file in case we run again
-  lineinfile:
-     path: schema.yml
-     regexp: '^(.*)inventory_source'
-     line: 'REPLACEME'
 
 
